@@ -38,6 +38,30 @@ func main() {
 }
 ```
 
+## API
+
+### MacOSVersion()
+
+Returns the macOS version or an error if the platform is not macOS.
+
+### IsMacOSVersion(semverRange)
+
+Returns a `bool` if whether the specified [semver range](https://github.com/Masterminds/semver#basic-comparisons) matches the macOS version or an error if there is an issue parsing the version.
+
+### AssertMacOSVersion(semverRange)
+
+Throws an error if the specified [semver range](https://github.com/Masterminds/semver#basic-comparisons) does not match the macOS version.
+
+### AssertMacOS()
+
+Throws an error if the platform is not macOS.
+
+### IsMacOS
+
+Type: `bool`
+
+Whether the platform is macOS.
+
 ## Credits
 
 https://github.com/sindresorhus/macos-version
