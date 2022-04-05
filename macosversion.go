@@ -11,7 +11,7 @@ import (
 	"github.com/Masterminds/semver"
 )
 
-const isMacOS = runtime.GOOS == "darwin"
+const IsMacOS = runtime.GOOS == "darwin"
 var version string
 
 func clean(version string) string {
@@ -40,8 +40,8 @@ func parseVersion(plist string) string {
 	return match
 }
 
-func macOSVersion() (string, error) {
-	if !isMacOS {
+func MacOSVersion() (string, error) {
+	if !IsMacOS {
 		return "", errors.New("requires macOS")
 	}
 
@@ -55,8 +55,8 @@ func macOSVersion() (string, error) {
 	return version, nil
 }
 
-func isMacOSVersion(semverRange string) (bool, error) {
-	if !isMacOS {
+func IsMacOSVersion(semverRange string) (bool, error) {
+	if !IsMacOS {
 		return false, errors.New("requires macOS")
 	}
 
@@ -68,7 +68,7 @@ func isMacOSVersion(semverRange string) (bool, error) {
 		return false, errors.New("unable to parse constraint")
 	}
 
-	macV, _ := macOSVersion()
+	macV, _ := MacOSVersion()
 	v, err := semver.NewVersion(macV)
 	if err != nil {
 		return false, errors.New("unable to parse macOS version")
@@ -77,17 +77,17 @@ func isMacOSVersion(semverRange string) (bool, error) {
 	return c.Check(v), nil
 }
 
-func assertMacOSVersion(semverRange string) {
+func AssertMacOSVersion(semverRange string) {
 	semverRange = strings.Replace(semverRange, "10.16", "11", -1)
 
-	r, err := isMacOSVersion(semverRange)
+	r, err := IsMacOSVersion(semverRange)
 	if err != nil || !r {
 		panic(fmt.Sprintf("Requires macOS %s", semverRange))
 	}
 }
 
-func assertMacOS() {
-	if !isMacOS {
+func AssertMacOS() {
+	if !IsMacOS {
 		panic("Requires macOS")
 	}
 }
