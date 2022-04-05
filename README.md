@@ -29,7 +29,7 @@ func main() {
 	mac.AssertMacOSVersion(">=10.12.5")
 	// Error: Requires macOS >=10.12.5
 
-	mac.assertMacOS()
+	mac.AssertMacOS()
 	// Error: Requires macOS
 
 	if mac.IsMacOS {
